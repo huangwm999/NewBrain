@@ -1,0 +1,14 @@
+// GAN
+digraph {
+	x [shape=none]
+	z [shape=none]
+	D [shape=box]
+	G [shape=box]
+	G_loss [shape=none]
+	D_loss [shape=none]
+	z -> G
+	x -> D
+	G -> D [label=y]
+	G -> G_loss [label=y]
+	D -> D_loss [label=y]
+}

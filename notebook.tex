@@ -1,0 +1,707 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{CNN-Visualizing}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{c+c1}{\PYZsh{} 卷积网络的训练数据为MNIST(28*28灰度单色图像)}
+         \PY{k+kn}{import} \PY{n+nn}{tensorflow} \PY{k+kn}{as} \PY{n+nn}{tf}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib.pyplot} \PY{k+kn}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{from} \PY{n+nn}{tensorflow.examples.tutorials.mnist} \PY{k+kn}{import} \PY{n}{input\PYZus{}data}
+         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{train\PYZus{}epochs} \PY{o}{=} \PY{l+m+mi}{100}    \PY{c+c1}{\PYZsh{} 训练轮数}
+         \PY{n}{batch\PYZus{}size}   \PY{o}{=} \PY{l+m+mi}{100}     \PY{c+c1}{\PYZsh{} 随机出去数据大小}
+         \PY{n}{display\PYZus{}step} \PY{o}{=} \PY{l+m+mi}{1}       \PY{c+c1}{\PYZsh{} 显示训练结果的间隔}
+         \PY{n}{learning\PYZus{}rate}\PY{o}{=} \PY{l+m+mf}{0.0001}  \PY{c+c1}{\PYZsh{} 学习效率}
+         \PY{n}{drop\PYZus{}prob}    \PY{o}{=} \PY{l+m+mf}{0.5}     \PY{c+c1}{\PYZsh{} 正则化,丢弃比例}
+         \PY{n}{fch\PYZus{}nodes}    \PY{o}{=} \PY{l+m+mi}{512}     \PY{c+c1}{\PYZsh{} 全连接隐藏层神经元的个数}
+\end{Verbatim}
+
+输入层为输入的灰度图像尺寸:  -1 x 28 x 28 x 1 
+第一个卷积层,卷积核的大小,深度和数量 (5, 5, 1, 16)
+池化后的特征张量尺寸:       -1 x 14 x 14 x 16
+第二个卷积层,卷积核的大小,深度和数量 (5, 5, 16, 32)
+池化后的特征张量尺寸:       -1 x 7 x 7 x 32
+全连接层权重矩阵         1568 x 512
+输出层与全连接隐藏层之间,  512 x 10
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{} 网络模型需要的一些辅助函数}
+         \PY{c+c1}{\PYZsh{} 权重初始化(卷积核初始化)}
+         \PY{c+c1}{\PYZsh{} tf.truncated\PYZus{}normal()不同于tf.random\PYZus{}normal(),返回的值中不会偏离均值两倍的标准差}
+         \PY{c+c1}{\PYZsh{} 参数shpae为一个列表对象,例如[5, 5, 1, 32]对应}
+         \PY{c+c1}{\PYZsh{} 5,5 表示卷积核的大小, 1代表通道channel,对彩色图片做卷积是3,单色灰度为1}
+         \PY{c+c1}{\PYZsh{} 最后一个数字32,卷积核的个数,(也就是卷基层提取的特征数量)}
+         \PY{c+c1}{\PYZsh{}   显式声明数据类型,切记}
+         \PY{k}{def} \PY{n+nf}{weight\PYZus{}init}\PY{p}{(}\PY{n}{shape}\PY{p}{)}\PY{p}{:}
+             \PY{n}{weights} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{truncated\PYZus{}normal}\PY{p}{(}\PY{n}{shape}\PY{p}{,} \PY{n}{stddev}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{,}\PY{n}{dtype}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{float32}\PY{p}{)}
+             \PY{k}{return} \PY{n}{tf}\PY{o}{.}\PY{n}{Variable}\PY{p}{(}\PY{n}{weights}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} 偏置的初始化}
+         \PY{k}{def} \PY{n+nf}{biases\PYZus{}init}\PY{p}{(}\PY{n}{shape}\PY{p}{)}\PY{p}{:}
+             \PY{n}{biases} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{random\PYZus{}normal}\PY{p}{(}\PY{n}{shape}\PY{p}{,}\PY{n}{dtype}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{float32}\PY{p}{)}
+             \PY{k}{return} \PY{n}{tf}\PY{o}{.}\PY{n}{Variable}\PY{p}{(}\PY{n}{biases}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} 随机选取mini\PYZus{}batch}
+         \PY{k}{def} \PY{n+nf}{get\PYZus{}random\PYZus{}batchdata}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{p}{,} \PY{n}{batchsize}\PY{p}{)}\PY{p}{:}
+             \PY{n}{start\PYZus{}index} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{n\PYZus{}samples} \PY{o}{\PYZhy{}} \PY{n}{batchsize}\PY{p}{)}
+             \PY{k}{return} \PY{p}{(}\PY{n}{start\PYZus{}index}\PY{p}{,} \PY{n}{start\PYZus{}index} \PY{o}{+} \PY{n}{batchsize}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{c+c1}{\PYZsh{} 全连接层权重初始化函数xavier}
+         \PY{k}{def} \PY{n+nf}{xavier\PYZus{}init}\PY{p}{(}\PY{n}{layer1}\PY{p}{,} \PY{n}{layer2}\PY{p}{,} \PY{n}{constant} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+             \PY{n}{Min} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{constant} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{l+m+mf}{6.0} \PY{o}{/} \PY{p}{(}\PY{n}{layer1} \PY{o}{+} \PY{n}{layer2}\PY{p}{)}\PY{p}{)}
+             \PY{n}{Max} \PY{o}{=} \PY{n}{constant} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{l+m+mf}{6.0} \PY{o}{/} \PY{p}{(}\PY{n}{layer1} \PY{o}{+} \PY{n}{layer2}\PY{p}{)}\PY{p}{)}
+             \PY{k}{return} \PY{n}{tf}\PY{o}{.}\PY{n}{Variable}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{random\PYZus{}uniform}\PY{p}{(}\PY{p}{(}\PY{n}{layer1}\PY{p}{,} \PY{n}{layer2}\PY{p}{)}\PY{p}{,} \PY{n}{minval} \PY{o}{=} \PY{n}{Min}\PY{p}{,} \PY{n}{maxval} \PY{o}{=} \PY{n}{Max}\PY{p}{,} \PY{n}{dtype} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{float32}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{c+c1}{\PYZsh{} 卷积}
+         \PY{k}{def} \PY{n+nf}{conv2d}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{w}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{conv2d}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{w}\PY{p}{,} \PY{n}{strides}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SAME}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} 源码的位置在tensorflow/python/ops下nn\PYZus{}impl.py和nn\PYZus{}ops.py}
+         \PY{c+c1}{\PYZsh{} 这个函数接收两个参数,x 是图像的像素, w 是卷积核}
+         \PY{c+c1}{\PYZsh{} x 张量的维度[batch, height, width, channels]}
+         \PY{c+c1}{\PYZsh{} w 卷积核的维度[height, width, channels, channels\PYZus{}multiplier]}
+         \PY{c+c1}{\PYZsh{} tf.nn.conv2d()是一个二维卷积函数,}
+         \PY{c+c1}{\PYZsh{} stirdes 是卷积核移动的步长,4个1表示,在x张量维度的四个参数上移动步长}
+         \PY{c+c1}{\PYZsh{} padding 参数\PYZsq{}SAME\PYZsq{},表示对原始输入像素进行填充,卷积后映射的2D图像与原图大小相等}
+         \PY{c+c1}{\PYZsh{} 填充,是指在原图像素值矩阵周围填充0像素点}
+         \PY{c+c1}{\PYZsh{} 如果不进行填充,假设 原图为 32x32 的图像,卷积和大小为 5x5 ,卷积后映射图像大小 为 28x28}
+\end{Verbatim}
+
+卷积核在提取特征时的动作成为padding，它有两种方式：SAME和VALID。卷积核的移动步长不一定能够整除图片像素的宽度，所以在有些图片的边框位置有些像素不能被卷积。这种不越过边缘的取样就叫做 valid padding，卷积后的图像面积小于原图像。为了让卷积核覆盖到所有的像素，可以对边缘位置进行0像素填充，然后在进行卷积。这种越过边缘的取样是 same padding。如过移动步长为1，那么得到和原图一样大小的图像。
+    如果步长很大，超过了卷积核长度，那么same padding，得到的特征图也会小于原来的图像。
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{c+c1}{\PYZsh{} 池化}
+         \PY{k}{def} \PY{n+nf}{max\PYZus{}pool\PYZus{}2x2}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{max\PYZus{}pool}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{ksize}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{strides}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SAME}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} 池化跟卷积的情况有点类似}
+         \PY{c+c1}{\PYZsh{} x 是卷积后,有经过非线性激活后的图像,}
+         \PY{c+c1}{\PYZsh{} ksize 是池化滑动张量}
+         \PY{c+c1}{\PYZsh{} ksize 的维度[batch, height, width, channels],跟 x 张量相同}
+         \PY{c+c1}{\PYZsh{} strides [1, 2, 2, 1],与上面对应维度的移动步长}
+         \PY{c+c1}{\PYZsh{} padding与卷积函数相同,padding=\PYZsq{}VALID\PYZsq{},对原图像不进行0填充}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{c+c1}{\PYZsh{} x 是手写图像的像素值,y 是图像对应的标签}
+         \PY{n}{x} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{placeholder}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{float32}\PY{p}{,} \PY{p}{[}\PY{n+nb+bp}{None}\PY{p}{,} \PY{l+m+mi}{784}\PY{p}{]}\PY{p}{)}
+         \PY{n}{y} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{placeholder}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{float32}\PY{p}{,} \PY{p}{[}\PY{n+nb+bp}{None}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{]}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} 把灰度图像一维向量,转换为28x28二维结构}
+         \PY{n}{x\PYZus{}image} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{28}\PY{p}{,} \PY{l+m+mi}{28}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} \PYZhy{}1表示任意数量的样本数,大小为28x28深度为一的张量}
+         \PY{c+c1}{\PYZsh{} 可以忽略(其实是用深度为28的,28x1的张量,来表示28x28深度为1的张量)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{c+c1}{\PYZsh{}第一层卷积+池化}
+         
+         \PY{n}{w\PYZus{}conv1} \PY{o}{=} \PY{n}{weight\PYZus{}init}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{16}\PY{p}{]}\PY{p}{)}                             \PY{c+c1}{\PYZsh{} 5x5,深度为1,16个}
+         \PY{n}{b\PYZus{}conv1} \PY{o}{=} \PY{n}{biases\PYZus{}init}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{16}\PY{p}{]}\PY{p}{)}
+         \PY{n}{h\PYZus{}conv1} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{relu}\PY{p}{(}\PY{n}{conv2d}\PY{p}{(}\PY{n}{x\PYZus{}image}\PY{p}{,} \PY{n}{w\PYZus{}conv1}\PY{p}{)} \PY{o}{+} \PY{n}{b\PYZus{}conv1}\PY{p}{)}    \PY{c+c1}{\PYZsh{} 输出张量的尺寸:28x28x16}
+         \PY{n}{h\PYZus{}pool1} \PY{o}{=} \PY{n}{max\PYZus{}pool\PYZus{}2x2}\PY{p}{(}\PY{n}{h\PYZus{}conv1}\PY{p}{)}                                   \PY{c+c1}{\PYZsh{} 池化后张量尺寸:14x14x16}
+         \PY{c+c1}{\PYZsh{} h\PYZus{}pool1 , 14x14的16个特征图}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{c+c1}{\PYZsh{}第二层卷积+池化}
+         \PY{n}{w\PYZus{}conv2} \PY{o}{=} \PY{n}{weight\PYZus{}init}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{32}\PY{p}{]}\PY{p}{)}                             \PY{c+c1}{\PYZsh{} 5x5,深度为16,32个}
+         \PY{n}{b\PYZus{}conv2} \PY{o}{=} \PY{n}{biases\PYZus{}init}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{32}\PY{p}{]}\PY{p}{)}
+         \PY{n}{h\PYZus{}conv2} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{relu}\PY{p}{(}\PY{n}{conv2d}\PY{p}{(}\PY{n}{h\PYZus{}pool1}\PY{p}{,} \PY{n}{w\PYZus{}conv2}\PY{p}{)} \PY{o}{+} \PY{n}{b\PYZus{}conv2}\PY{p}{)}    \PY{c+c1}{\PYZsh{} 输出张量的尺寸:14x14x32}
+         \PY{n}{h\PYZus{}pool2} \PY{o}{=} \PY{n}{max\PYZus{}pool\PYZus{}2x2}\PY{p}{(}\PY{n}{h\PYZus{}conv2}\PY{p}{)}                                   \PY{c+c1}{\PYZsh{} 池化后张量尺寸:7x7x32}
+         \PY{c+c1}{\PYZsh{} h\PYZus{}pool2 , 7x7的32个特征图}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{c+c1}{\PYZsh{}全连接层}
+         \PY{c+c1}{\PYZsh{} h\PYZus{}pool2是一个7x7x32的tensor,将其转换为一个一维的向量}
+         \PY{n}{h\PYZus{}fpool2} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{h\PYZus{}pool2}\PY{p}{,} \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{7}\PY{o}{*}\PY{l+m+mi}{7}\PY{o}{*}\PY{l+m+mi}{32}\PY{p}{]}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} 全连接层,隐藏层节点为512个}
+         \PY{c+c1}{\PYZsh{} 权重初始化}
+         \PY{n}{w\PYZus{}fc1} \PY{o}{=} \PY{n}{xavier\PYZus{}init}\PY{p}{(}\PY{l+m+mi}{7}\PY{o}{*}\PY{l+m+mi}{7}\PY{o}{*}\PY{l+m+mi}{32}\PY{p}{,} \PY{n}{fch\PYZus{}nodes}\PY{p}{)}
+         \PY{n}{b\PYZus{}fc1} \PY{o}{=} \PY{n}{biases\PYZus{}init}\PY{p}{(}\PY{p}{[}\PY{n}{fch\PYZus{}nodes}\PY{p}{]}\PY{p}{)}
+         \PY{n}{h\PYZus{}fc1} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{relu}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{matmul}\PY{p}{(}\PY{n}{h\PYZus{}fpool2}\PY{p}{,} \PY{n}{w\PYZus{}fc1}\PY{p}{)} \PY{o}{+} \PY{n}{b\PYZus{}fc1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{c+c1}{\PYZsh{} 全连接隐藏层/输出层}
+         \PY{c+c1}{\PYZsh{} 为了防止网络出现过拟合的情况,对全连接隐藏层进行 Dropout(正则化)处理,在训练过程中随机的丢弃部分}
+         \PY{c+c1}{\PYZsh{} 节点的数据来防止过拟合.Dropout同把节点数据设置为0来丢弃一些特征值,仅在训练过程中,}
+         \PY{c+c1}{\PYZsh{} 预测的时候,仍使用全数据特征}
+         \PY{c+c1}{\PYZsh{} 传入丢弃节点数据的比例}
+         \PY{c+c1}{\PYZsh{}keep\PYZus{}prob = tf.placeholder(tf.float32)}
+         \PY{n}{h\PYZus{}fc1\PYZus{}drop} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{dropout}\PY{p}{(}\PY{n}{h\PYZus{}fc1}\PY{p}{,} \PY{n}{keep\PYZus{}prob}\PY{o}{=}\PY{n}{drop\PYZus{}prob}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} 隐藏层与输出层权重初始化}
+         \PY{n}{w\PYZus{}fc2} \PY{o}{=} \PY{n}{xavier\PYZus{}init}\PY{p}{(}\PY{n}{fch\PYZus{}nodes}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{b\PYZus{}fc2} \PY{o}{=} \PY{n}{biases\PYZus{}init}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{10}\PY{p}{]}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} 未激活的输出}
+         \PY{n}{y\PYZus{}} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{matmul}\PY{p}{(}\PY{n}{h\PYZus{}fc1\PYZus{}drop}\PY{p}{,} \PY{n}{w\PYZus{}fc2}\PY{p}{)}\PY{p}{,} \PY{n}{b\PYZus{}fc2}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} 激活后的输出}
+         \PY{n}{y\PYZus{}out} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{softmax}\PY{p}{(}\PY{n}{y\PYZus{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{c+c1}{\PYZsh{} 交叉熵代价函数}
+         \PY{n}{cross\PYZus{}entropy} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{reduce\PYZus{}mean}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{tf}\PY{o}{.}\PY{n}{reduce\PYZus{}sum}\PY{p}{(}\PY{n}{y} \PY{o}{*} \PY{n}{tf}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{y\PYZus{}out}\PY{p}{)}\PY{p}{,} \PY{n}{reduction\PYZus{}indices} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} tensorflow自带一个计算交叉熵的方法}
+         \PY{c+c1}{\PYZsh{} 输入没有进行非线性激活的输出值 和 对应真实标签}
+         \PY{c+c1}{\PYZsh{}cross\PYZus{}loss = tf.reduce\PYZus{}mean(tf.nn.softmax\PYZus{}cross\PYZus{}entropy\PYZus{}with\PYZus{}logits(y\PYZus{}, y))}
+         
+         \PY{c+c1}{\PYZsh{} 优化器选择Adam(有多个选择)}
+         \PY{n}{optimizer} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{train}\PY{o}{.}\PY{n}{AdamOptimizer}\PY{p}{(}\PY{n}{learning\PYZus{}rate}\PY{p}{)}\PY{o}{.}\PY{n}{minimize}\PY{p}{(}\PY{n}{cross\PYZus{}entropy}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} 准确率}
+         \PY{c+c1}{\PYZsh{} 每个样本的预测结果是一个(1,10)的vector}
+         \PY{n}{correct\PYZus{}prediction} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{equal}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{tf}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{y\PYZus{}out}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} tf.cast把bool值转换为浮点数}
+         \PY{n}{accuracy} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{reduce\PYZus{}mean}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{cast}\PY{p}{(}\PY{n}{correct\PYZus{}prediction}\PY{p}{,} \PY{n}{tf}\PY{o}{.}\PY{n}{float32}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{c+c1}{\PYZsh{} 全局变量进行初始化的Operation}
+         \PY{n}{init} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{global\PYZus{}variables\PYZus{}initializer}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{c+c1}{\PYZsh{} 加载数据集MNIST}
+         \PY{n}{mnist} \PY{o}{=} \PY{n}{input\PYZus{}data}\PY{o}{.}\PY{n}{read\PYZus{}data\PYZus{}sets}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MNIST\PYZus{}data/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{one\PYZus{}hot}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+         \PY{n}{n\PYZus{}samples} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{mnist}\PY{o}{.}\PY{n}{train}\PY{o}{.}\PY{n}{num\PYZus{}examples}\PY{p}{)}
+         \PY{n}{total\PYZus{}batches} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{n\PYZus{}samples} \PY{o}{/} \PY{n}{batch\PYZus{}size}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Extracting MNIST\_data/train-images-idx3-ubyte.gz
+Extracting MNIST\_data/train-labels-idx1-ubyte.gz
+Extracting MNIST\_data/t10k-images-idx3-ubyte.gz
+Extracting MNIST\_data/t10k-labels-idx1-ubyte.gz
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{c+c1}{\PYZsh{} 会话}
+         \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{Session}\PY{p}{(}\PY{p}{)} \PY{k}{as} \PY{n}{sess}\PY{p}{:}
+             \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{init}\PY{p}{)}
+             \PY{n}{Cost} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{n}{Accuracy} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{train\PYZus{}epochs}\PY{p}{)}\PY{p}{:}
+         
+                 \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{start\PYZus{}index}\PY{p}{,} \PY{n}{end\PYZus{}index} \PY{o}{=} \PY{n}{get\PYZus{}random\PYZus{}batchdata}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{p}{)}
+         
+                     \PY{n}{batch\PYZus{}x} \PY{o}{=} \PY{n}{mnist}\PY{o}{.}\PY{n}{train}\PY{o}{.}\PY{n}{images}\PY{p}{[}\PY{n}{start\PYZus{}index}\PY{p}{:} \PY{n}{end\PYZus{}index}\PY{p}{]}
+                     \PY{n}{batch\PYZus{}y} \PY{o}{=} \PY{n}{mnist}\PY{o}{.}\PY{n}{train}\PY{o}{.}\PY{n}{labels}\PY{p}{[}\PY{n}{start\PYZus{}index}\PY{p}{:} \PY{n}{end\PYZus{}index}\PY{p}{]}
+                     \PY{n}{\PYZus{}}\PY{p}{,} \PY{n}{cost}\PY{p}{,} \PY{n}{accu} \PY{o}{=} \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{p}{[} \PY{n}{optimizer}\PY{p}{,} \PY{n}{cross\PYZus{}entropy}\PY{p}{,}\PY{n}{accuracy}\PY{p}{]}\PY{p}{,} \PY{n}{feed\PYZus{}dict}\PY{o}{=}\PY{p}{\PYZob{}}\PY{n}{x}\PY{p}{:}\PY{n}{batch\PYZus{}x}\PY{p}{,} \PY{n}{y}\PY{p}{:}\PY{n}{batch\PYZus{}y}\PY{p}{\PYZcb{}}\PY{p}{)}
+                     \PY{n}{Cost}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{cost}\PY{p}{)}
+                     \PY{n}{Accuracy}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{accu}\PY{p}{)}
+                 \PY{k}{if} \PY{n}{i} \PY{o}{\PYZpc{}} \PY{n}{display\PYZus{}step} \PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{k}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Epoch : }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{ ,  Cost : }\PY{l+s+si}{\PYZpc{}.7f}\PY{l+s+s1}{\PYZsq{}}\PY{o}{\PYZpc{}}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{cost}\PY{p}{)}\PY{p}{)}
+             \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{training finished}\PY{l+s+s1}{\PYZsq{}}
+             \PY{c+c1}{\PYZsh{} 代价函数曲线}
+             \PY{n}{fig1}\PY{p}{,}\PY{n}{ax1} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{Cost}\PY{p}{)}
+             \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Epochs}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cost}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cross Loss}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} 准确率曲线}
+             \PY{n}{fig7}\PY{p}{,}\PY{n}{ax7} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{Accuracy}\PY{p}{)}
+             \PY{n}{ax7}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Epochs}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax7}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accuracy Rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Train Accuracy Rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}各个层特征可视化\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+             \PY{c+c1}{\PYZsh{} imput image}
+             \PY{n}{fig2}\PY{p}{,}\PY{n}{ax2} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+             \PY{n}{ax2}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{mnist}\PY{o}{.}\PY{n}{train}\PY{o}{.}\PY{n}{images}\PY{p}{[}\PY{l+m+mi}{11}\PY{p}{]}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{28}\PY{p}{,} \PY{l+m+mi}{28}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} 第一层的卷积输出的特征图}
+             \PY{n}{input\PYZus{}image} \PY{o}{=} \PY{n}{mnist}\PY{o}{.}\PY{n}{train}\PY{o}{.}\PY{n}{images}\PY{p}{[}\PY{l+m+mi}{11}\PY{p}{:}\PY{l+m+mi}{12}\PY{p}{]}
+             \PY{n}{conv1\PYZus{}16} \PY{o}{=} \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{h\PYZus{}conv1}\PY{p}{,} \PY{n}{feed\PYZus{}dict}\PY{o}{=}\PY{p}{\PYZob{}}\PY{n}{x}\PY{p}{:}\PY{n}{input\PYZus{}image}\PY{p}{\PYZcb{}}\PY{p}{)}     \PY{c+c1}{\PYZsh{} [16, 28, 28 ,1] }
+             \PY{n}{conv1\PYZus{}reshape} \PY{o}{=} \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{conv1\PYZus{}16}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{28}\PY{p}{,} \PY{l+m+mi}{28}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+             \PY{n}{fig3}\PY{p}{,}\PY{n}{ax3} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{nrows}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{ncols}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{,} \PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{ax3}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{conv1\PYZus{}reshape}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}                      \PY{c+c1}{\PYZsh{} tensor的切片[batch, channels, row, column]}
+         
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Conv1 16x28x28}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} 第一层池化后的特征图}
+             \PY{n}{pool1\PYZus{}16} \PY{o}{=} \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{h\PYZus{}pool1}\PY{p}{,} \PY{n}{feed\PYZus{}dict}\PY{o}{=}\PY{p}{\PYZob{}}\PY{n}{x}\PY{p}{:}\PY{n}{input\PYZus{}image}\PY{p}{\PYZcb{}}\PY{p}{)}     \PY{c+c1}{\PYZsh{} [16, 14, 14, 1]}
+             \PY{n}{pool1\PYZus{}reshape} \PY{o}{=} \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{pool1\PYZus{}16}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{14}\PY{p}{,} \PY{l+m+mi}{14}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+             \PY{n}{fig4}\PY{p}{,}\PY{n}{ax4} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{nrows}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{ncols}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{ax4}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{pool1\PYZus{}reshape}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pool1 16x14x14}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} 第二层卷积输出特征图}
+             \PY{n}{conv2\PYZus{}32} \PY{o}{=} \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{h\PYZus{}conv2}\PY{p}{,} \PY{n}{feed\PYZus{}dict}\PY{o}{=}\PY{p}{\PYZob{}}\PY{n}{x}\PY{p}{:}\PY{n}{input\PYZus{}image}\PY{p}{\PYZcb{}}\PY{p}{)}          \PY{c+c1}{\PYZsh{} [32, 14, 14, 1]}
+             \PY{n}{conv2\PYZus{}reshape} \PY{o}{=} \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{conv2\PYZus{}32}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{32}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{14}\PY{p}{,} \PY{l+m+mi}{14}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+             \PY{n}{fig5}\PY{p}{,}\PY{n}{ax5} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{nrows}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{ncols}\PY{o}{=}\PY{l+m+mi}{32}\PY{p}{,} \PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{32}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{32}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{ax5}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{conv2\PYZus{}reshape}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Conv2 32x14x14}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} 第二层池化后的特征图}
+             \PY{n}{pool2\PYZus{}32} \PY{o}{=} \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{h\PYZus{}pool2}\PY{p}{,} \PY{n}{feed\PYZus{}dict}\PY{o}{=}\PY{p}{\PYZob{}}\PY{n}{x}\PY{p}{:}\PY{n}{input\PYZus{}image}\PY{p}{\PYZcb{}}\PY{p}{)}          \PY{c+c1}{\PYZsh{}[32, 7, 7, 1]}
+             \PY{n}{pool2\PYZus{}reshape} \PY{o}{=} \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{pool2\PYZus{}32}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{32}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+             \PY{n}{fig6}\PY{p}{,}\PY{n}{ax6} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{nrows}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{ncols}\PY{o}{=}\PY{l+m+mi}{32}\PY{p}{,} \PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{32}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pool2 32x7x7}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{32}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{ax6}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{pool2\PYZus{}reshape}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch : 1 ,  Cost : 1.6899389
+Epoch : 2 ,  Cost : 0.9668981
+Epoch : 3 ,  Cost : 0.7566496
+Epoch : 4 ,  Cost : 0.4742918
+Epoch : 5 ,  Cost : 0.6242965
+Epoch : 6 ,  Cost : 0.3673792
+Epoch : 7 ,  Cost : 0.3442676
+Epoch : 8 ,  Cost : 0.1806469
+Epoch : 9 ,  Cost : 0.2228109
+Epoch : 10 ,  Cost : 0.2517818
+Epoch : 11 ,  Cost : 0.2438759
+Epoch : 12 ,  Cost : 0.2048153
+Epoch : 13 ,  Cost : 0.1667642
+Epoch : 14 ,  Cost : 0.3384268
+Epoch : 15 ,  Cost : 0.1388240
+Epoch : 16 ,  Cost : 0.2415184
+Epoch : 17 ,  Cost : 0.0811123
+Epoch : 18 ,  Cost : 0.1122941
+Epoch : 19 ,  Cost : 0.0695417
+Epoch : 20 ,  Cost : 0.2174458
+Epoch : 21 ,  Cost : 0.0576450
+Epoch : 22 ,  Cost : 0.1214709
+Epoch : 23 ,  Cost : 0.1966615
+Epoch : 24 ,  Cost : 0.0886958
+Epoch : 25 ,  Cost : 0.1646022
+Epoch : 26 ,  Cost : 0.1028294
+Epoch : 27 ,  Cost : 0.1288778
+Epoch : 28 ,  Cost : 0.1073752
+Epoch : 29 ,  Cost : 0.1205944
+Epoch : 30 ,  Cost : 0.0525499
+Epoch : 31 ,  Cost : 0.1136699
+Epoch : 32 ,  Cost : 0.1430860
+Epoch : 33 ,  Cost : 0.1323627
+Epoch : 34 ,  Cost : 0.1081963
+Epoch : 35 ,  Cost : 0.0601370
+Epoch : 36 ,  Cost : 0.0688220
+Epoch : 37 ,  Cost : 0.0789238
+Epoch : 38 ,  Cost : 0.1674726
+Epoch : 39 ,  Cost : 0.1570282
+Epoch : 40 ,  Cost : 0.1170384
+Epoch : 41 ,  Cost : 0.0284291
+Epoch : 42 ,  Cost : 0.0692201
+Epoch : 43 ,  Cost : 0.0524429
+Epoch : 44 ,  Cost : 0.0494546
+Epoch : 45 ,  Cost : 0.0338252
+Epoch : 46 ,  Cost : 0.1605963
+Epoch : 47 ,  Cost : 0.0674381
+Epoch : 48 ,  Cost : 0.0395116
+Epoch : 49 ,  Cost : 0.0119031
+Epoch : 50 ,  Cost : 0.0280759
+Epoch : 51 ,  Cost : 0.0945522
+Epoch : 52 ,  Cost : 0.0949661
+Epoch : 53 ,  Cost : 0.0103476
+Epoch : 54 ,  Cost : 0.0254852
+Epoch : 55 ,  Cost : 0.1163008
+Epoch : 56 ,  Cost : 0.1000084
+Epoch : 57 ,  Cost : 0.0975688
+Epoch : 58 ,  Cost : 0.0813735
+Epoch : 59 ,  Cost : 0.0662734
+Epoch : 60 ,  Cost : 0.0213827
+Epoch : 61 ,  Cost : 0.0035592
+Epoch : 62 ,  Cost : 0.0456152
+Epoch : 63 ,  Cost : 0.0967892
+Epoch : 64 ,  Cost : 0.0166221
+Epoch : 65 ,  Cost : 0.0118751
+Epoch : 66 ,  Cost : 0.0676897
+Epoch : 67 ,  Cost : 0.0412018
+Epoch : 68 ,  Cost : 0.0475316
+Epoch : 69 ,  Cost : 0.0264644
+Epoch : 70 ,  Cost : 0.0579811
+Epoch : 71 ,  Cost : 0.0321051
+Epoch : 72 ,  Cost : 0.0305708
+Epoch : 73 ,  Cost : 0.0273771
+Epoch : 74 ,  Cost : 0.0503254
+Epoch : 75 ,  Cost : 0.1333364
+Epoch : 76 ,  Cost : 0.0214606
+Epoch : 77 ,  Cost : 0.0590577
+Epoch : 78 ,  Cost : 0.0920167
+Epoch : 79 ,  Cost : 0.0856620
+Epoch : 80 ,  Cost : 0.0131723
+Epoch : 81 ,  Cost : 0.0024217
+Epoch : 82 ,  Cost : 0.0436596
+Epoch : 83 ,  Cost : 0.0379525
+Epoch : 84 ,  Cost : 0.0411978
+Epoch : 85 ,  Cost : 0.0702270
+Epoch : 86 ,  Cost : 0.0365487
+Epoch : 87 ,  Cost : 0.0855664
+Epoch : 88 ,  Cost : 0.0773118
+Epoch : 89 ,  Cost : 0.0057690
+Epoch : 90 ,  Cost : 0.0969254
+Epoch : 91 ,  Cost : 0.0499169
+Epoch : 92 ,  Cost : 0.1799114
+Epoch : 93 ,  Cost : 0.0333694
+Epoch : 94 ,  Cost : 0.0306298
+Epoch : 95 ,  Cost : 0.0743578
+Epoch : 96 ,  Cost : 0.0353191
+Epoch : 97 ,  Cost : 0.0163220
+Epoch : 98 ,  Cost : 0.1084050
+Epoch : 99 ,  Cost : 0.0090282
+Epoch : 100 ,  Cost : 0.0454374
+training finished
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_6.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_7.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
